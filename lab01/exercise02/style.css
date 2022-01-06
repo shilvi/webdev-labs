@@ -11,14 +11,56 @@ Add some style blocks below this line to style the cards.
 Feel free to borrow from Exercise 1.
 */
 
+section {
+    box-sizing: border-box;
+    border: solid 1px #CCC; 
+    width: 50vh;
+    padding: 10px 0;
+    margin: 10px;
+}
+
+section > * {
+    margin: 10px 20px;
+}
+
+section > img {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+
+section > iframe {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+
+/*
+Added google font for header 2 section
+*/
+
+section h2 {
+    font-family: 'Tangerine', serif;
+    font-size: 48px;
+}
+
+main {
+    display: flex;
+}
 
 /* Tablet Media Query */
 @media only screen and (max-width: 1000px) {
-
+    main {
+        flex-wrap: wrap;
+    }
+    section {
+        width: 40%;
+    }
 }
 
 /* Mobile Phone Media Query */
 @media only screen and (max-width: 600px) {
-
-    
+    section {
+        width: 100%;
+    }
 }
