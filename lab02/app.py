@@ -12,7 +12,7 @@ app = Flask(__name__)
 #########################
 # some global variables #
 #########################
-current_user = CurrentUser(first_name='Erick', last_name='Rubi', email='erub03@gmail.com', username='erub03')
+current_user = CurrentUser(first_name='Shilvi', last_name='Satpati', email='rimli.satpati@gmail.com', username='shilvi')
 
 quotes = (
     '“We May Encounter Many Defeats But We Must Not Be Defeated.” – Maya Angelou',
