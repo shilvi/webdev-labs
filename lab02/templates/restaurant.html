@@ -13,21 +13,13 @@
     <main>
         <p>Search location: {{city}}</p>
         <p>Search term: {{search_term or 'None Specified'}}</p>
-        <h2>Top Restaurant:</h2> 
+        <h2>Restaurants:</h2> 
 
-        <section>
-            <h2>{{ restaurant.get('name') }}</h2>
-            <img src="{{ restaurant.get('image_url') }}" alt="picture of nature"/>
-            <p>{{ restaurant.get('display_address') }}</p>
-            <dl>
-                <dt>Price</dt>
-                <dd>{{ restaurant.get('price') }}</dd>
-                <dt>Rating</dt>
-                <dd>{{ restaurant.get('rating') }}</dd>
-                <dt># Reviews</dt>
-                <dd>{{ restaurant.get('review_count') }}</dd>
-            </dl>
-        </section>
+        <div>
+        {% for restaurant in restaurants %}
+        {% include 'includes/restaurant-box.html' %}
+        {% endfor %}
+        </div>
     </main>
 </body>
 </html>

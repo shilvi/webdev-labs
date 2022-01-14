@@ -72,7 +72,7 @@ def exercise4(city='Evanston, IL', search_term=''):
         user=current_user,
         search_term=search_term,
         city=city,
-        restaurant=restaurants[0]
+        restaurants=restaurants
     )
 
 @app.route('/cards')

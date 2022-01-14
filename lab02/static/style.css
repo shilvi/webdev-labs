@@ -27,13 +27,18 @@ main {
     margin: 3vh;
 }
 
+main > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 section {
     box-sizing: border-box;
     border: solid 1px #CCC; 
-    width: 50vh;
+    width: 40vh;
     padding: 10px 0;
     margin: 10px;
-    height: 70vh;
+    height: 75vh;
 }
 
 section > * {
