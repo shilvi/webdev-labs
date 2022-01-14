@@ -46,14 +46,14 @@ def exercise2():
 ##############
 # Exercise 3 #
 ##############
+@app.route('/restaurant-data/<city>/<search_term>')
+@app.route('/restaurant-data/<city>')
 @app.route('/restaurant-data')
-def exercise3():
-    import json
-    search_term = 'pizza'
-    city = 'Evanston, Il'
+def exercise3(city='Evanston, IL', search_term=''):
     url = 'https://www.apitutor.org/yelp/simple/v3/businesses/search?location={0}&term={1}'.format(city, search_term)
     response = requests.get(url)
     data = response.json()
+    pprint(data) # for debugging -- prints the result to the command line
     return json.dumps(data)
 
 ##############
