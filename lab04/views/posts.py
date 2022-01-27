@@ -14,16 +14,13 @@ class PostListEndpoint(Resource):
         self.current_user = current_user
 
     def get(self):
-        # TODO: 
-        # 1. No security implemented; 
-        # 2. limit is hard coded (versus coming from the query parameter)
-        # 3. No error checking
-        data = Post.query.limit(20).all()
+        # `can_view_post` filter query defined incorrectly due to short circuiting
 
-        data = [
-            item.to_dict() for item in data
-        ]
-        return Response(json.dumps(data), mimetype="application/json", status=200)
+        try:
+            posts = Post.query.filter(Post.user_id.in_(get_authorized_user_ids(self.current_user))).limit(request.args.get('limit'))
+            return Response(json.dumps([item.to_dict() for item in posts.all()]), mimetype="application/json", status=200)
+        except ValueError:
+            return Response(json.dumps({'message': 'Invalid Parameters'}), mimetype="application/json", status=400)
 
 
 
