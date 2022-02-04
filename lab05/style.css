@@ -112,3 +112,25 @@ button {
 .high-contrast button {
     color: black;
 }
+
+.dyslexia-mode * {
+    font-family: 'OpenDyslexicRegular';
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.35ch;
+    word-spacing: 1.225ch;
+    font-variant-ligatures: none;
+    font-weight: 600;
+    color: #000;
+}
+
+.dyslexia-mode header {
+    font-size: larger;
+}
+
+.dyslexia-mode .content {
+    font-size: 1.5em;
+    line-height: 2.0;
+    margin-left: 22%;
+    margin-right: 22%;
+}
