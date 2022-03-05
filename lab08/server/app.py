@@ -20,6 +20,18 @@ logged_in_users = dict()
 
 PORT = os.environ.get('WS_PORT') or 8081
 
+async def broadcast(data):
+    for sock in logged_in_users:
+        await sock.send(json.dumps(data))
+
+async def disconnect_user(websocket):
+    if websocket not in logged_in_users:
+        return
+
+    del logged_in_users[websocket]
+    await broadcast({'type': 'disconnect',
+                     'users': list(logged_in_users.values())})
+
 async def respond_to_message(websocket, message):
     try:
         data = json.loads(message)
@@ -79,11 +91,18 @@ async def respond_to_message(websocket, message):
     ********************************************************************/
     '''
     
-    await websocket.send(json.dumps(data))
-    # for sock in logged_in_users:
-    #     # TODO: replace "data" with a message that conforms to
-    #     # the specs above:
-    #     await sock.send(json.dumps(data))
+    match data:
+        case {'type': 'login', 'username': username}:
+            logged_in_users[websocket] = username
+            await broadcast({'type': 'login',
+                             'users': list(logged_in_users.values())})
+        case {'type': 'disconnect'}:
+            await disconnect_user(websocket)
+        case {'type': 'chat'}:
+            await broadcast(data)
+        case _:
+            await websocket.send(json.dumps({'error': f'error decoding {data}',
+                                             'details': 'See instructions for list of valid message formats.'}))
 
 
 
@@ -95,8 +114,7 @@ async def broadcast_messages(websocket, path):
         print('A client just disconnected')
         print(e)
     finally:
-        if logged_in_users.get(websocket):
-            del logged_in_users[websocket]
+        await disconnect_user(websocket)
     
 
 async def main():

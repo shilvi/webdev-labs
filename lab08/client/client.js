@@ -45,6 +45,25 @@ const initializeConnection = ev => {
          *      to the #chat div (main panel).
          ************************************************************/
 
+        switch (data.type) {
+            case 'login':
+            case 'disconnect':
+                document.querySelector('#users-list').innerHTML = `
+                    <ul>
+                    ${data.users.map(user => `
+                        <li>${user}</li>
+                    `).join('\n')}
+                    </ul>
+                `
+                break
+            case 'chat':
+                document.querySelector('#chat').innerHTML += `
+                    <p class="${data.username === username ? 'right' : 'left'}">
+                        <strong>${data.username}:</strong> ${data.text}
+                    </p>
+                `
+                break
+        }
     };
 };
 
