@@ -1,39 +1,26 @@
 import React from 'react';
+import NavBar from './components/NavBar';
+import Profile from './components/Profile';
+import Stories from './components/Stories';
+import Suggestions from './components/Suggestions';
+import Posts from './components/Posts';
 
-class App extends React.Component {  
+class App extends React.Component {
 
     render () {
         return (
             <div>
 
-            <nav className="main-nav">
-                <h1>Photo App</h1>
-                {/* Navigation Links */}
-            </nav>
+            <NavBar title='Photo App' username='webdev' />
 
             <aside>
-                <header>
-                    Profile
-                    {/* Navigation Links */}
-                </header>
-                <div className="suggestions">
-                    <p className="suggestion-text">Suggestions for you</p>
-                    <div>
-                        Suggestions
-                        {/* Suggestions */}
-                    </div>
-                </div>
+                <Profile />
+                <Suggestions />
             </aside>
 
-            <main className="content">
-                <header className="stories">
-                    Stories
-                    {/* Stories */}
-                </header>
-                <div id="posts">
-                    Posts
-                    {/* Posts */}
-                </div>
+            <main className='content'>
+                <Stories />
+                <Posts />
             </main>
 
             </div>
